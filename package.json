@@ -1,0 +1,14 @@
+{
+  "name": "tanukey-workers-proxy",
+  "version": "1.0.0",
+  "description": "TanukeyをCloudflare Pagesで動かして、Cloudflare WorkersでAPIサーバーとつなぐためのProxy実装です。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^4.6.5"
+  }
+}

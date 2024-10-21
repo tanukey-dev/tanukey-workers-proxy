@@ -1,0 +1,12 @@
+TanukeyをCloudflare Pagesで動かして、Cloudflare WorkersでAPIサーバーとつなぐためのProxy実装です。
+
+コマンドラインツールのインストール
+
+```
+npm install -g wrangler
+```
+
+
+
+```
+```
