@@ -6,7 +6,7 @@ TanukeyをCloudflare Pagesで動かして、Cloudflare WorkersでAPIサーバー
 npm install -g wrangler
 ```
 
-
-
 ```
+cd tanukey-workers-proxy
+npm run dev
 ```
