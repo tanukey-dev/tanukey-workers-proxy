@@ -123,3 +123,19 @@ FRONT_HOST = "front-staging.tarbin.net"
 # [[vectorize]]
 # binding = "MY_INDEX"
 # index_name = "my-index"
+
+[env.novelskey]
+name = "tanukey-workers-proxy-novelskey"
+main = "src/index.ts"
+
+[env.novelskey.vars]
+API_HOST = "api-novelskey.tarbin.net"
+FRONT_HOST = "front-tanukey-master.tarbin.net"
+
+[env.otoskey]
+name = "tanukey-workers-proxy-otoskey"
+main = "src/index.ts"
+
+[env.otoskey.vars]
+API_HOST = "api-otoskey.tarbin.net"
+FRONT_HOST = "front-tanukey-master.tarbin.net"
