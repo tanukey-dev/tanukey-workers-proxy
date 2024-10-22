@@ -25,7 +25,7 @@ enabled = true
 # MY_VARIABLE = "production_value"
 
 [vars]
-API_HOST = "api-staging.tarbin.net"
+API_HOST = "staging.tarbin.net"
 FRONT_HOST = "front-staging.tarbin.net"
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
@@ -129,7 +129,7 @@ name = "tanukey-workers-proxy-novelskey"
 main = "src/index.ts"
 
 [env.novelskey.vars]
-API_HOST = "api-novelskey.tarbin.net"
+API_HOST = "novelskey.tarbin.net"
 FRONT_HOST = "front-tanukey-master.tarbin.net"
 
 [env.otoskey]
@@ -137,5 +137,5 @@ name = "tanukey-workers-proxy-otoskey"
 main = "src/index.ts"
 
 [env.otoskey.vars]
-API_HOST = "api-otoskey.tarbin.net"
+API_HOST = "otoskey.tarbin.net"
 FRONT_HOST = "front-tanukey-master.tarbin.net"
