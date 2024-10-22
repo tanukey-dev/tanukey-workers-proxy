@@ -5,7 +5,6 @@ const proxy = async (c: Context, url: string) => {
 };
 
 const apiProxy = async (c: Context) => {
-  console.log(c.var.API_HOST);
   return proxy(c, `https://${c.env.API_HOST}`);
 };
 
