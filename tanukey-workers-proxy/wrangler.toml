@@ -24,6 +24,10 @@ enabled = true
 # [vars]
 # MY_VARIABLE = "production_value"
 
+[vars]
+API_HOST = "api-staging.tarbin.net"
+FRONT_HOST = "front-staging.tarbin.net"
+
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
 # [ai]
@@ -59,9 +63,9 @@ enabled = true
 # name = "MY_DURABLE_OBJECT"
 # class_name = "MyDurableObject"
 
-[[durable_objects.bindings]]
-name = "WEBSOCKET"
-class_name = "WebSocketConnection"
+#[[durable_objects.bindings]]
+#name = "WEBSOCKET"
+#class_name = "WebSocketConnection"
 
 # Durable Object migrations.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#migrations
@@ -69,9 +73,9 @@ class_name = "WebSocketConnection"
 # tag = "v1"
 # new_classes = ["MyDurableObject"]
 
-[[migrations]]
-tag = "v1"
-new_classes = ["WebSocketConnection"]
+#[[migrations]]
+#tag = "v1"
+#new_classes = ["WebSocketConnection"]
 
 # Bind a Hyperdrive configuration. Use to accelerate access to your existing databases from Cloudflare Workers.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#hyperdrive
