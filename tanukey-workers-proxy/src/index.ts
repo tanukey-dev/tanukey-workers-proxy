@@ -1,15 +1,20 @@
 import { Hono, Context } from 'hono'
 
 const proxy = async (c: Context, url: string) => {
-  return fetch(new URL(c.req.path, url), c.req.raw);
+  const fromUrl = new URL(c.req.url);
+  const toUrl = new URL(c.req.path, url);
+  return fetch(toUrl.href + fromUrl.search, c.req.raw);
 };
 
 const apiProxy = async (c: Context) => {
   return proxy(c, `https://${c.env.API_HOST}`);
 };
 
-const frontProxy = async (c: Context) => {
-  return proxy(c, `https://${c.env.FRONT_HOST}`);
+const viteProxy = async (c: Context) => {
+  if (c.env.VITE_HOST !== '')  {
+    return proxy(c, `https://${c.env.VITE_HOST}`);
+  }
+  return apiProxy(c);
 };
 
 const app = new Hono<{ Bindings: CloudflareBindings}>()
@@ -44,6 +49,11 @@ app.get('/fluent-emoji/*', apiProxy)
 app.get('/twemoji/*', apiProxy)
 app.get('/twemoji-badge/*', apiProxy)
 
+// vite
+app.get('/@vite/client', viteProxy)
+app.get('/@id/*', viteProxy)
+app.get('/@fs/*', viteProxy)
+
 // Activity Pub
 app.post('/inbox', apiProxy)
 app.post('/users/*', apiProxy)
@@ -60,8 +70,5 @@ app.all('/streaming', (c) => {
   url.host = c.env.API_HOST;
   return fetch(url, c.req.raw)
 })
-
-// frontend
-app.get('*', frontProxy)
 
 export default app

@@ -26,7 +26,7 @@ enabled = true
 
 [vars]
 API_HOST = "api-dev.tarbin.net"
-FRONT_HOST = "front-dev.tarbin.net"
+VITE_HOST = "vite-dev.tarbin.net"
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
@@ -130,7 +130,7 @@ main = "src/index.ts"
 
 [env.staging.vars]
 API_HOST = "api-staging.tarbin.net"
-FRONT_HOST = "front-staging.tarbin.net"
+VITE_HOST = ""
 
 [env.novelskey]
 name = "tanukey-workers-proxy-novelskey"
@@ -138,7 +138,7 @@ main = "src/index.ts"
 
 [env.novelskey.vars]
 API_HOST = "api-novelskey.tarbin.net"
-FRONT_HOST = "front-tanukey-master.tarbin.net"
+VITE_HOST = ""
 
 [env.otoskey]
 name = "tanukey-workers-proxy-otoskey"
@@ -146,4 +146,4 @@ main = "src/index.ts"
 
 [env.otoskey.vars]
 API_HOST = "api-otoskey.tarbin.net"
-FRONT_HOST = "front-tanukey-master.tarbin.net"
+VITE_HOST = ""
