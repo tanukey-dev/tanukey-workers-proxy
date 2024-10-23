@@ -10,13 +10,6 @@ const apiProxy = async (c: Context) => {
   return proxy(c, `https://${c.env.API_HOST}`);
 };
 
-const viteProxy = async (c: Context) => {
-  if (c.env.VITE_HOST !== '')  {
-    return proxy(c, `https://${c.env.VITE_HOST}`);
-  }
-  return apiProxy(c);
-};
-
 const app = new Hono<{ Bindings: CloudflareBindings}>()
 
 app.all('/api/*', apiProxy)
@@ -48,11 +41,6 @@ app.get('/apple-touch-icon.png', apiProxy)
 app.get('/fluent-emoji/*', apiProxy)
 app.get('/twemoji/*', apiProxy)
 app.get('/twemoji-badge/*', apiProxy)
-
-// vite
-app.get('/@vite/client', viteProxy)
-app.get('/@id/*', viteProxy)
-app.get('/@fs/*', viteProxy)
 
 // Activity Pub
 app.post('/inbox', apiProxy)
