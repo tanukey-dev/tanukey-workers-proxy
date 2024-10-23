@@ -11,8 +11,9 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy novelskey
+      - name: Deploy staging
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           workingDirectory: "tanukey-workers-proxy"
+          command: deploy --env staging
