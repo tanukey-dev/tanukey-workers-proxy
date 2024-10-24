@@ -3,7 +3,11 @@ import { Hono, Context } from 'hono'
 const proxy = async (c: Context, url: string) => {
   const fromUrl = new URL(c.req.url);
   const toUrl = new URL(c.req.path, url);
-  return fetch(toUrl.href + fromUrl.search, c.req.raw);
+  const fetchUrl = toUrl.href + fromUrl.search;
+  console.error(fetchUrl);
+  console.error(c.req.raw);
+  const res = await fetch(fetchUrl, c.req.raw);
+  return res;
 };
 
 const apiProxy = async (c: Context) => {
@@ -45,6 +49,7 @@ app.get('/twemoji-badge/*', apiProxy)
 // Activity Pub
 app.post('/inbox', apiProxy)
 app.post('/users/*', apiProxy)
+app.get('/users/*', apiProxy)
 app.get('/notes/*', apiProxy)
 app.get('/@*', apiProxy)
 app.get('/emojis/*', apiProxy)
