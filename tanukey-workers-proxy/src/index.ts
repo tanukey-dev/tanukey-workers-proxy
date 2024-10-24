@@ -4,10 +4,7 @@ const proxy = async (c: Context, url: string) => {
   const fromUrl = new URL(c.req.url);
   const toUrl = new URL(c.req.path, url);
   const fetchUrl = toUrl.href + fromUrl.search;
-  console.error(fetchUrl);
-  console.error(c.req.raw);
-  const res = await fetch(fetchUrl, c.req.raw);
-  return res;
+  return fetch(fetchUrl, c.req.raw);
 };
 
 const apiProxy = async (c: Context) => {
