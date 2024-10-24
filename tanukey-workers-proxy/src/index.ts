@@ -1,10 +1,24 @@
 import { Hono, Context } from 'hono'
 
-const proxy = async (c: Context, url: string) => {
-  const fromUrl = new URL(c.req.url);
-  const toUrl = new URL(c.req.path, url);
-  const fetchUrl = toUrl.href + fromUrl.search;
-  return fetch(fetchUrl, c.req.raw);
+const proxy = async (c: Context, targetUrl: string) => {
+  const targetHost = new URL(targetUrl);
+  const newUrl = Object.assign(new URL(c.req.url), {
+    protocol: targetHost.protocol,
+    hostname: targetHost.hostname,
+    port: targetHost.port,
+  });
+  const newHeaders = new Headers(c.req.raw.headers);
+  const req = new Request(newUrl.toString(), {
+    method: c.req.method,
+    headers: newHeaders,
+    body: ["GET", "HEAD"].includes(c.req.method)
+      ? undefined
+      : await c.req.blob(),
+  });
+  console.log(`Proxying to ${c.req.method} ${newUrl}...`);
+  const res = await fetch(req);
+  console.log(`  => ${res.status} ${res.statusText}`);
+  return res;
 };
 
 const apiProxy = async (c: Context) => {
