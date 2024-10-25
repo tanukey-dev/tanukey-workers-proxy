@@ -3,6 +3,9 @@ name = "tanukey-workers-proxy"
 main = "src/index.ts"
 compatibility_date = "2024-10-18"
 
+routes = [
+]
+
 # Workers Logs
 # Docs: https://developers.cloudflare.com/workers/observability/logs/workers-logs/
 # Configuration: https://developers.cloudflare.com/workers/observability/logs/workers-logs/#enable-workers-logs
@@ -13,8 +16,8 @@ enabled = true
 # If you are running back-end logic in a Worker, running it closer to your back-end infrastructure
 # rather than the end user may result in better performance.
 # Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
-# [placement]
-# mode = "smart"
+[placement]
+mode = "smart"
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Docs:
@@ -62,19 +65,11 @@ API_HOST = "api-dev.tarbin.net"
 # name = "MY_DURABLE_OBJECT"
 # class_name = "MyDurableObject"
 
-#[[durable_objects.bindings]]
-#name = "WEBSOCKET"
-#class_name = "WebSocketConnection"
-
 # Durable Object migrations.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#migrations
 # [[migrations]]
 # tag = "v1"
 # new_classes = ["MyDurableObject"]
-
-#[[migrations]]
-#tag = "v1"
-#new_classes = ["WebSocketConnection"]
 
 # Bind a Hyperdrive configuration. Use to accelerate access to your existing databases from Cloudflare Workers.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#hyperdrive
@@ -126,6 +121,41 @@ API_HOST = "api-dev.tarbin.net"
 [env.staging]
 name = "tanukey-workers-proxy-staging"
 main = "src/index.ts"
+
+routes = [
+    { pattern = "staging.tarbin.net/api/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/api-doc", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/api-json", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/.nodeinfo", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/.well-known", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/manifest.json", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/robots.txt", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/opensearch.xml", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/url", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/emoji/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/avatar/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/identicon/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/verify-email", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/sw.js", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/files/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/proxy/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/assets/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/static-assets/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/client-assets/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/favicon.ico", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/apple-touch-icon.png", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/fluent-emoji/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/twemoji/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/twemoji-badge/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/inbox", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/users/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/notes/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/@*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/emojis/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/likes/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/follows/*", zone_name = "tarbin.net" },
+    { pattern = "staging.tarbin.net/streaming", zone_name = "tarbin.net" },
+]
 
 [env.staging.vars]
 API_HOST = "api-staging.tarbin.net"
